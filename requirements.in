@@ -1,0 +1,8 @@
+django-cors-headers
+django-extensions
+Django
+djangorestframework
+pip-tools
+psycopg2
+requests
+uwsgi
