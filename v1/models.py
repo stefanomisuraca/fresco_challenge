@@ -21,11 +21,18 @@ class Recipe(models.Model):
         help_text="The name of the recipe"
     )
 
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True
+    )
+
     class Meta:
       app_label = 'v1'
 
 class Instruction(models.Model):
     """Instruction model, linked to Recipe"""
+    
     id = models.BigAutoField(primary_key=True)
     step_number=models.PositiveIntegerField(
         default=0,
@@ -35,7 +42,8 @@ class Instruction(models.Model):
         max_length=500,
         help_text="Step instruction text"
     )
-    recipe = models.ForeignKey(Recipe,
+    recipe = models.ForeignKey(
+        Recipe,
         related_name="instructions",
         on_delete=models.CASCADE
     )

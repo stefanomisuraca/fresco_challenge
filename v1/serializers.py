@@ -1,7 +1,17 @@
 from rest_framework import serializers
 from v1.models import Recipe, Instruction, Ingredient
 from django.db.utils import IntegrityError
+from django.contrib.auth import get_user_model
 from typing import Dict
+
+User = get_user_model()
+
+class UserSerializer(serializers.ModelSerializer):
+    """User api serializer"""
+
+    class Meta:
+        model = User
+        fields = ["id", "username", "email", "first_name", "last_name"]
 
 class InstructionSerializer(serializers.ModelSerializer):
     """Instruction api serilizer"""
@@ -26,6 +36,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     name = serializers.CharField()
     instructions = InstructionSerializer(many=True, read_only=False)
     ingredients = IngredientSerializer(many=True)
+    user = UserSerializer(many=False, read_only=True)
 
     def create(self, validated_data:Dict) -> Recipe:
         """Custom create function for nested object Recipe"""
@@ -74,14 +85,10 @@ class RecipeSerializer(serializers.ModelSerializer):
         
         for ingredient in ingredients_set:
             try:
-                obj, created = Ingredient.objects.update_or_create(
+                Ingredient.objects.update_or_create(
                     id=ingredient.get("id"),
-                    # ingredient_name=ingredient.get("ingredient_name"),
-                    # amount=ingredient.get("amount"),
-                    # unit=ingredient.get("unit"),
                     defaults={**ingredient, "recipe":instance},
                 )
-                print(obj, created)
             except IntegrityError:
                 print("Duplicate entry")
                 continue
