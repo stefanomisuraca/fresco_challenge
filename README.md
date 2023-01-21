@@ -108,6 +108,7 @@ To avoid confusion, I'm writing a list of the files I wrote.
 * /requirements.in
 * /run.sh
 
-- Tests: In a real project I would have chosen a unit test approach with pytest framework or similar, depending on the context.
+## Tests
+In a real project I would have chosen a unit test approach with pytest framework or similar, depending on the context.
 In this case I would test the api behaviour by mocking the responses or using a test database for real testing scenarios.
 Tests are not present due to lack of time, sorry for that.
