@@ -11,6 +11,7 @@ Code challenge for Fresco
 ## How to run the project
 
 * Simply run `docker-compose up --build`
+* Nginx server is running on port `8000` -> go to `localhost:8000`
 
 The system will take care of running the migrations and the fixtures automatically
 

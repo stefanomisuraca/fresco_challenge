@@ -20,7 +20,7 @@ services:
     container_name: api
     build: .
     ports:
-      - 8000:8000
+      - 8888:8888
     command: sh docker_startup.sh
     volumes:
       - .:/app
@@ -37,7 +37,7 @@ services:
       - uwsgi_data:/tmp/uwsgi/
       - ./static:/var/www/fresco/assets/:ro
     ports:
-      - "80:80"
+      - "8000:8000"
     depends_on: 
       - api
 volumes:
