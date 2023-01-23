@@ -1,0 +1,20 @@
+[
+    {
+        "model": "v1.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$390000$m2PGU7vF17XJC9g1EzcuyE$YiDvahonegjlhmOVXsJh/ecxaVQ5btuSofOk07MUuZA=",
+            "last_login": null,
+            "is_superuser": true,
+            "username": "test",
+            "first_name": "NameTest",
+            "last_name": "SurnameTest",
+            "email": "test@fresco.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-10T10:34:30.521Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]

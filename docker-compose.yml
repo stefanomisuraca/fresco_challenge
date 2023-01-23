@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      POSTGRES_PASSWORD: db_pass
+      POSTGRES_USER: fresco
+      POSTGRES_DB: fresco
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data/
+  adminer:
+      image: adminer
+      container_name: adminer
+      restart: always
+      ports:
+        - 8080:8080
+  api:
+    container_name: api
+    build: .
+    ports:
+      - 8888:8888
+    command: sh docker_startup.sh
+    volumes:
+      - .:/app
+      - uwsgi_data:/tmp/uwsgi/
+      - ./static:/code/static/
+      - ./static:/var/www/fresco/assets/
+    depends_on:
+      - db
+  nginx:
+    container_name: nginx
+    build: ./nginx/
+    restart: always
+    volumes:
+      - uwsgi_data:/tmp/uwsgi/
+      - ./static:/var/www/fresco/assets/:ro
+    ports:
+      - "8000:8000"
+    depends_on: 
+      - api
+volumes:
+  db-data:
+  uwsgi_data:
+  web_static:
