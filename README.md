@@ -12,6 +12,9 @@ Code challenge for Fresco
 
 * Simply run `docker-compose up --build`
 * Nginx server is running on port `8000` -> go to `localhost:8000`
+* There is a predefined user for token request or admin access:
+Username --> `test`
+Password --> `test123`
 
 The system will take care of running the migrations and the fixtures automatically
 
